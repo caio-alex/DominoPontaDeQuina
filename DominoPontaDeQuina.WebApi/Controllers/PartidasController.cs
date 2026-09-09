@@ -1,6 +1,9 @@
-using DominoPontaDeQuina.Application.Services;
-using DominoPontaDeQuina.WebApi.Contracts;
+using DominoPontaDeQuina.Core.Models;
+using DominoPontaDeQuina.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using DominoPontaDeQuina.WebApi.Contracts;
+using DominoPontaDeQuina.Application;
+using DominoPontaDeQuina.Application.Services; // Para o IPartidaService
 
 namespace DominoPontaDeQuina.WebApi.Controllers;
 

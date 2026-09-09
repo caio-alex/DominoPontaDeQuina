@@ -1,6 +1,8 @@
+using DominoPontaDeQuina.Core;
+using DominoPontaDeQuina.Domain;
+using DominoPontaDeQuina.Repository;
 using DominoPontaDeQuina.Application;
 using DominoPontaDeQuina.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
