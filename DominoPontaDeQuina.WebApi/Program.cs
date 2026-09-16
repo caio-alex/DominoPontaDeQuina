@@ -3,6 +3,9 @@ using DominoPontaDeQuina.Domain;
 using DominoPontaDeQuina.Repository;
 using DominoPontaDeQuina.Application;
 using DominoPontaDeQuina.Infrastructure;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +39,22 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
+var jwtSecretKey = builder.Configuration["JwtSettings:SecretKey"];
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuaChaveSecretaSuperSeguraAqui")),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
