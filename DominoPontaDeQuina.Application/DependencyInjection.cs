@@ -7,11 +7,14 @@ namespace DominoPontaDeQuina.Application;
 public static class DependencyInjection
 {
     /// <summary>Adiciona os serviços de aplicação.</summary>
-    /// <param name="services">Contêiner de serviços.</param>
-    /// <returns>O contêiner para encadeamento.</returns>
     public static IServiceCollection AddDominoApplication(this IServiceCollection services)
     {
+        // Aqui registramos APENAS as regras de negócio (Services)
         services.AddScoped<IPartidaService, PartidaService>();
+
+        // Não se esqueça de registrar o AuthService que construímos hoje mais cedo!
+        services.AddScoped<IAuthService, AuthService>();
+
         return services;
     }
 }

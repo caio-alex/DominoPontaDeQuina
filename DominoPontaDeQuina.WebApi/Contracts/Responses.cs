@@ -1,5 +1,6 @@
 using DominoPontaDeQuina.Domain.Entities;
-
+using DominoPontaDeQuina.Core.Models;
+using Jogador = DominoPontaDeQuina.Core.Models.Jogador;
 namespace DominoPontaDeQuina.WebApi.Contracts;
 
 // Por que não devolver as entidades (Partida, Jogador, ...) direto da API?
@@ -13,7 +14,7 @@ namespace DominoPontaDeQuina.WebApi.Contracts;
 public sealed record PartidaResponse(Guid Id, int PontuacaoAlvo, string Status, DateTime CriadaEm)
 {
     public static PartidaResponse FromEntity(Partida partida) =>
-        new(partida.Id, partida.PontuacaoAlvo, partida.Status, partida.CriadaEm);
+        new(partida.Id, partida.PontuacaoAlvo, partida.Status.ToString(), partida.CriadaEm);
 }
 
 /// <summary>Representação de um jogador devolvida pela API.</summary>

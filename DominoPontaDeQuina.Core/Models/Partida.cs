@@ -13,6 +13,9 @@ namespace DominoPontaDeQuina.Core.Models;
 /// </param>
 public class Partida(int pontuacaoAlvo = 50) : IPartida
 {
+    // Adicione estas duas linhas:
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public DateTime CriadaEm { get; set; } = DateTime.UtcNow;
     /// <summary>
     /// Armazena as rodadas registradas neste nivel da hierarquia.
     /// </summary>

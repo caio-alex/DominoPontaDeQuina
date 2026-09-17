@@ -1,6 +1,8 @@
 using DominoPontaDeQuina.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using DominoPontaDeQuina.Core.Models;
+using DominoPontaDeQuina.Domain.Interfaces;
 
 namespace DominoPontaDeQuina.Infrastructure.Persistence.EntityConfigurations;
 

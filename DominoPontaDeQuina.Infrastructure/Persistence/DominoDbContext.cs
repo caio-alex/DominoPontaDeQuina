@@ -1,7 +1,9 @@
 using DominoPontaDeQuina.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-
+using DominoPontaDeQuina.Domain.Interfaces;
+using DominoPontaDeQuina.Core.Models;
 namespace DominoPontaDeQuina.Infrastructure.Persistence;
+using Jogador = DominoPontaDeQuina.Core.Models.Jogador;
 
 /// <summary>Representa a sessão do EF Core com o banco do Dominó.</summary>
 public class DominoDbContext(DbContextOptions<DominoDbContext> options) : DbContext(options)
@@ -11,7 +13,7 @@ public class DominoDbContext(DbContextOptions<DominoDbContext> options) : DbCont
     /// <summary>Obtém as partidas persistidas.</summary>
     public DbSet<Partida> Partidas => Set<Partida>();
     /// <summary>Obtém os jogadores persistidos.</summary>
-    public DbSet<Jogador> Jogadores => Set<Jogador>();
+    public DbSet<DominoPontaDeQuina.Core.Models.Jogador> Jogadores { get; set; }
     /// <summary>Obtém as participações persistidas.</summary>
     public DbSet<ParticipacaoPartida> ParticipacoesPartida => Set<ParticipacaoPartida>();
     /// <summary>Obtém os lances persistidos.</summary>

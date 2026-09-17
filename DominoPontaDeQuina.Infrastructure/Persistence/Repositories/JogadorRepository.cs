@@ -1,5 +1,5 @@
-using DominoPontaDeQuina.Domain.Entities;
-using DominoPontaDeQuina.Domain.Repositories;
+using DominoPontaDeQuina.Domain.Interfaces;
+using DominoPontaDeQuina.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DominoPontaDeQuina.Infrastructure.Persistence.Repositories;
@@ -11,8 +11,9 @@ public sealed class JogadorRepository : EfRepository<Jogador>, IJogadorRepositor
 
     /// <summary>Inicializa o repositório de jogadores.</summary>
     public JogadorRepository(DominoDbContext db) : base(db) => this.db = db;
+
     /// <inheritdoc />
-    public async Task<Jogador> AdicionarComUsuarioAsync(Jogador jogador, Guid? usuarioId, CancellationToken cancellationToken = default)
+    public async Task<Jogador> AdicionarComUsuarioAsync(Jogador jogador, Guid? usuarioId = null, CancellationToken cancellationToken = default)
     {
         db.Jogadores.Add(jogador);
         db.Entry(jogador).Property<Guid?>("UsuarioId").CurrentValue = usuarioId;
@@ -22,5 +23,5 @@ public sealed class JogadorRepository : EfRepository<Jogador>, IJogadorRepositor
 
     /// <inheritdoc />
     public Task<bool> ExisteAsync(Guid id, CancellationToken cancellationToken = default) =>
-        db.Jogadores.AnyAsync(jogador => jogador.Id == id, cancellationToken);
+        db.Jogadores.AnyAsync(j => j.Id == id, cancellationToken);
 }

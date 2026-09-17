@@ -1,4 +1,4 @@
-using DominoPontaDeQuina.Domain.Repositories;
+using DominoPontaDeQuina.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace DominoPontaDeQuina.Infrastructure.Persistence.Repositories;

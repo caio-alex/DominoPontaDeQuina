@@ -1,6 +1,8 @@
 using DominoPontaDeQuina.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using DominoPontaDeQuina.Core.Models;
+using DominoPontaDeQuina.Domain.Interfaces;
 
 namespace DominoPontaDeQuina.Infrastructure.Persistence.EntityConfigurations;
 
@@ -15,9 +17,8 @@ public sealed class RankingConfiguration : IEntityTypeConfiguration<Ranking>
         builder.HasKey("JogadorId");
         builder.Property(ranking => ranking.Vitorias).IsRequired();
 
-        builder.HasOne(ranking => ranking.Jogador)
-            .WithOne(jogador => jogador.Ranking)
-            .HasForeignKey<Ranking>("JogadorId")
-            .OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(r => r.Jogador)
+       .WithMany()
+       .HasForeignKey("JogadorId");
     }
 }

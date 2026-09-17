@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using DominoPontaDeQuina.WebApi.Contracts;
 using DominoPontaDeQuina.Application;
 using DominoPontaDeQuina.Application.Services; // Para o IPartidaService
+using Microsoft.AspNetCore.Authorization;
 
 namespace DominoPontaDeQuina.WebApi.Controllers;
 
-
+[Authorize]
 [ApiController]
 [Route("api/partidas")]
 public sealed class PartidasController(IPartidaService partidaService) : ControllerBase

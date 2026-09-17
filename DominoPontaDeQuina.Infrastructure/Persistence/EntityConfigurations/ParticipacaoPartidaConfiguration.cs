@@ -1,6 +1,8 @@
 using DominoPontaDeQuina.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using DominoPontaDeQuina.Core.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using DominoPontaDeQuina.Domain.Interfaces;
 
 namespace DominoPontaDeQuina.Infrastructure.Persistence.EntityConfigurations;
 
@@ -15,9 +17,12 @@ public sealed class ParticipacaoPartidaConfiguration : IEntityTypeConfiguration<
         builder.Property<Guid>("JogadorId");
         builder.HasKey("PartidaId", "JogadorId");
         builder.Property(participacao => participacao.Pontos).IsRequired();
-        builder.HasOne(participacao => participacao.Partida).WithMany(partida => partida.Participacoes)
-            .HasForeignKey("PartidaId").OnDelete(DeleteBehavior.Cascade);
-        builder.HasOne(participacao => participacao.Jogador).WithMany(jogador => jogador.Participacoes)
-            .HasForeignKey("JogadorId").OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(p => p.Partida)
+       .WithMany()
+       .HasForeignKey("PartidaId");
+
+        builder.HasOne(p => p.Jogador)
+               .WithMany()
+               .HasForeignKey("JogadorId");
     }
 }

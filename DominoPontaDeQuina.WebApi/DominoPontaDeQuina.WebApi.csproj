@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+	  <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -13,7 +13,8 @@
     <!-- Precisa do provedor SQL Server aqui porque é este projeto quem chama UseSqlServer
          ao configurar a Infrastructure (o método AddDominoInfrastructure só recebe o
          delegate de configuração, quem escolhe o provedor é quem monta o host). -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.19" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
@@ -21,6 +22,8 @@
 	  <ProjectReference Include="../DominoPontaDeQuina.Core/DominoPontaDeQuina.Core.csproj" />
 	  <ProjectReference Include="../DominoPontaDeQuina.Domain/DominoPontaDeQuina.Domain.csproj" />
 	  <ProjectReference Include="../DominoPontaDeQuina.Repository/DominoPontaDeQuina.Repository.csproj" />
+	  <ProjectReference Include="..\DominoPontaDeQuina.Application\DominoPontaDeQuina.Application.csproj" />
+	  <ProjectReference Include="..\DominoPontaDeQuina.Infrastructure\DominoPontaDeQuina.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

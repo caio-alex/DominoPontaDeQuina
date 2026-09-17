@@ -26,4 +26,6 @@ public class Usuario
     public DateTime CriadoEm { get; set; } = DateTime.UtcNow;
 
     public ICollection<Jogador> Jogadores { get; set; } = new List<Jogador>();
+
+    public string SenhaHash { get; set; } = string.Empty;
 }

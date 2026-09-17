@@ -1,4 +1,5 @@
-using DominoPontaDeQuina.Domain.Repositories;
+using DominoPontaDeQuina.Domain.Interfaces;
+using DominoPontaDeQuina.Core.Models;
 using DominoPontaDeQuina.Domain.Entities;
 
 namespace DominoPontaDeQuina.Infrastructure.Persistence.Repositories;

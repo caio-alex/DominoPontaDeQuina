@@ -1,8 +1,10 @@
-using DominoPontaDeQuina.Domain.Repositories;
+using DominoPontaDeQuina.Domain.Interfaces;
 using DominoPontaDeQuina.Infrastructure.Persistence;
 using DominoPontaDeQuina.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using DominoPontaDeQuina.Core.Models;
+
 
 namespace DominoPontaDeQuina.Infrastructure;
 

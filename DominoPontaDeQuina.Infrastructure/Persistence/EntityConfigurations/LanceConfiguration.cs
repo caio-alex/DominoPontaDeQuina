@@ -1,6 +1,8 @@
 using DominoPontaDeQuina.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using DominoPontaDeQuina.Core.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using DominoPontaDeQuina.Domain.Interfaces;
 
 namespace DominoPontaDeQuina.Infrastructure.Persistence.EntityConfigurations;
 
@@ -15,12 +17,12 @@ public sealed class LanceConfiguration : IEntityTypeConfiguration<Lance>
         builder.Property(lance => lance.Timestamp).IsRequired();
 
         builder.HasOne(lance => lance.Partida)
-            .WithMany(partida => partida.Lances)
+            .WithMany()
             .HasForeignKey("PartidaId")
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(lance => lance.Jogador)
-            .WithMany(jogador => jogador.Lances)
+            .WithMany()
             .HasForeignKey("JogadorId")
             .OnDelete(DeleteBehavior.Restrict);
 

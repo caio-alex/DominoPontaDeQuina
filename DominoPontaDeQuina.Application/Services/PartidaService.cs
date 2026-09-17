@@ -1,5 +1,7 @@
-using DominoPontaDeQuina.Domain.Entities;
-using DominoPontaDeQuina.Domain.Repositories;
+using DominoPontaDeQuina.Core.Enums;
+using DominoPontaDeQuina.Core.Models;
+using DominoPontaDeQuina.Domain.Interfaces;
+using Jogador = DominoPontaDeQuina.Core.Models.Jogador; // Resolve a ambiguidade do Jogador
 
 namespace DominoPontaDeQuina.Application.Services;
 
@@ -17,13 +19,12 @@ public sealed class PartidaService(
         if (pontuacaoAlvo <= 0)
             throw new ArgumentOutOfRangeException(nameof(pontuacaoAlvo));
 
-        var partida = new Partida
-        {
-            Id = Guid.NewGuid(),
-            PontuacaoAlvo = pontuacaoAlvo,
-            Status = "EmAndamento",
-            CriadaEm = DateTime.UtcNow
-        };
+        // Inicializa a partida usando o construtor, respeitando o encapsulamento
+        var partida = new Partida(pontuacaoAlvo);
+
+        // Inicia a primeira rodada, o que automaticamente muda o Status para EmAndamento
+        partida.IniciarNovaRodada();
+
         return partidas.AdicionarAsync(partida, cancellationToken);
     }
 
@@ -33,12 +34,11 @@ public sealed class PartidaService(
         ValidarNome(nome);
         await ObterPartidaOuFalharAsync(partidaId, cancellationToken);
 
-        var jogador = await jogadores.AdicionarComUsuarioAsync(new Jogador
-        {
-            Id = Guid.NewGuid(),
-            Nome = nome
-        }, usuarioId, cancellationToken);
+        // Instancia o jogador passando o nome pelo construtor
+        var jogador = await jogadores.AdicionarComUsuarioAsync(new Jogador(nome), usuarioId, cancellationToken);
+
         await participacoes.AdicionarNaPartidaAsync(new ParticipacaoPartida { Pontos = 0 }, partidaId, jogador.Id, cancellationToken);
+
         return jogador;
     }
 
@@ -46,8 +46,11 @@ public sealed class PartidaService(
     public async Task<Lance> RegistrarLanceAsync(Guid partidaId, Guid jogadorId, CancellationToken cancellationToken = default)
     {
         var partida = await ObterPartidaOuFalharAsync(partidaId, cancellationToken);
-        if (!string.Equals(partida.Status, "EmAndamento", StringComparison.OrdinalIgnoreCase))
+
+        // Compara utilizando o Enum fortemente tipado em vez de string
+        if (partida.Status != StatusPartida.EmAndamento)
             throw new InvalidOperationException("A partida não está em andamento.");
+
         if (!await jogadores.ExisteAsync(jogadorId, cancellationToken))
             throw new KeyNotFoundException("Jogador não encontrado.");
 

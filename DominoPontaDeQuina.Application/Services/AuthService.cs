@@ -23,7 +23,7 @@ namespace DominoPontaDeQuina.Application.Services
 
             // 2. Recupera a chave secreta (certifique-se de ter essa chave no appsettings.json)
             // A chave deve ter pelo menos 16 a 32 caracteres para usar algoritmos seguros (como HMAC SHA-256)
-            var key = Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]);
+            var key = Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"] ?? "");
 
             // 3. Define o Payload, contendo os dados do usuário (claims)[cite: 2]
             var claims = new ClaimsIdentity(new[]

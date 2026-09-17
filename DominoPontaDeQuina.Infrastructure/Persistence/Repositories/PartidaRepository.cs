@@ -1,5 +1,6 @@
 using DominoPontaDeQuina.Domain.Entities;
-using DominoPontaDeQuina.Domain.Repositories;
+using DominoPontaDeQuina.Domain.Interfaces;
+using DominoPontaDeQuina.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DominoPontaDeQuina.Infrastructure.Persistence.Repositories;

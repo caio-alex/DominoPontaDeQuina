@@ -1,5 +1,6 @@
 using DominoPontaDeQuina.Domain.Entities;
-
+using DominoPontaDeQuina.Core.Models;
+using Jogador = DominoPontaDeQuina.Core.Models.Jogador;
 namespace DominoPontaDeQuina.Application.Services;
 
 /// <summary>Expõe os casos de uso de gerenciamento de partidas.</summary>
