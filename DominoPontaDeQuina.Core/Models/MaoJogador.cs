@@ -5,10 +5,10 @@ namespace DominoPontaDeQuina.Core.Models;
 /// <inheritdoc cref="IMaoJogador"/>
 public class MaoJogador(Jogador jogador) : IMaoJogador
 {
-    /// <summary>
-    /// Obtem as pecas atualmente armazenadas na mao do jogador.
-    /// </summary>
-    List<Peca> _pecas = [];
+    private List<Peca> _pecas = [];
+
+    // PROPRIEDADE ADICIONADA PARA O TABULEIRO CONSEGUIR LER AS PEÇAS:
+    public IReadOnlyList<Peca> Pecas => _pecas;
 
     /// <inheritdoc />
     public Jogador Jogador { get; } = jogador ?? throw new ArgumentNullException(nameof(jogador));
